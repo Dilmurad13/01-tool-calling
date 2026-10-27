@@ -1,11 +1,15 @@
 import json
+import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from pydantic import BaseModel
 
 load_dotenv()
-client = OpenAI()
-MODEL = "gpt-4o-mini"  # любая доступная тебе модель
+client = OpenAI(
+    api_key=os.getenv("GROQ_API_KEY"),
+    base_url="https://api.groq.com/openai/v1",
+)
+MODEL = "openai/gpt-oss-20b"
 
 # --- ШАГ 1. Инструменты-заглушки (вместо настоящей базы клиники) ---
 SLOTS = {"2026-10-27": ["10:00", "12:00", "15:30"]}
